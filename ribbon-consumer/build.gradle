@@ -1,0 +1,70 @@
+group 'com.lc'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'ribbon-consumer'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Camden.SR5'
+    }
+}
+dependencies {
+    compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
+    compile('org.springframework.cloud:spring-cloud-starter-ribbon')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.projectlombok:lombok:1.16.6")
+    //加入Hystrix容错机制
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+    // tag::jetty[]
+    //   compile("org.springframework.boot:spring-boot-starter-web") {
+    //       exclude module: "spring-boot-starter-tomcat"
+    //   }
+    //   compile("org.springframework.boot:spring-boot-starter-jetty")
+    // end::jetty[]
+    // tag::actuator[]
+    //   compile("org.springframework.boot:spring-boot-starter-actuator")
+    // end::actuator[]
+//    testCompile("junit:junit")
+}
+
+
+task createJavaProject{
+    doLast{
+        sourceSets*.java.srcDirs*.each { it.mkdirs() }
+        sourceSets*.resources.srcDirs*.each { it.mkdirs()}
+        file('src/main/resources/application.properties').createNewFile();
+    }
+}
