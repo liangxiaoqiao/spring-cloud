@@ -8,8 +8,8 @@ import com.lc.gradle.test.User;
  */
 public class UserModule extends SimpleModule {
     public UserModule() {
-        addSerializer(new UserSerializer());
-        addDeserializer(User.class,new UserDeserializer());
+//        addSerializer(new UserSerializer());
+//        addDeserializer(User.class,new UserDeserializer());
     }
 
 }
