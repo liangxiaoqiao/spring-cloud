@@ -1,12 +1,12 @@
 package com.lc.gradle.test;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import com.netflix.governator.annotations.binding.Request;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.ArrayList;
@@ -48,8 +48,10 @@ public class SimpleController {
      *
      * @return it is just return a list contains 3 string.
      */
+    @ApiOperation(value="test return list",tags = {"test tag"})
     @RequestMapping(value="/test",method = {RequestMethod.POST,RequestMethod.GET})
-    public List test(){
+    public List test(@RequestParam MultipartFile file){
+        System.out.println(file.getName());
         List<String> list = new ArrayList<>();
         list.add("Test");
         list.add("Gradle");
@@ -65,8 +67,7 @@ public class SimpleController {
      * @param desc the desc of user
      * @return User entity
      */
-
-    @ApiOperation(value="bind user",notes = "根据传入值，生成一个user",response = User.class)
+    @ApiOperation(value="bind user",notes = "根据传入值，生成一个user",response = User.class,tags = {"user tag","json tag"})
     @ApiResponses(value={@ApiResponse(code=406,message="406 Error",response = MyRandom.class),@ApiResponse(code=500,message = "500 Error",response =User.class)})
     @RequestMapping(value = "/user",method = RequestMethod.POST)
     public User user(@RequestParam(name="id",required = false)Integer id, @RequestParam(name = "name",required = false)String name, @RequestParam(name = "age",defaultValue = "404")String age, @RequestParam(name="desc",required = false)String desc){

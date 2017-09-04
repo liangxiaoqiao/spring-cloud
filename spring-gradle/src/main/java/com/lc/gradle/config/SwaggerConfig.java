@@ -27,23 +27,23 @@ import static springfox.documentation.builders.RequestHandlerSelectors.basePacka
 public class SwaggerConfig {
     @Bean
     Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo()) //创建API的基本信息
-                .groupName("LC group")
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.lc.gradle.test")) //扫描的包路径
-                .paths(PathSelectors.any())
-                .build();
+return new Docket(DocumentationType.SWAGGER_2)
+        .apiInfo(apiInfo()) //创建API的基本信息
+        .groupName("LC group")
+        .apiInfo(apiInfo())
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("com.lc.gradle.test")) //扫描的包路径
+        .paths(PathSelectors.any())
+        .build();
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("Swagger Title")
-                .description("This is description.")
-                .termsOfServiceUrl("http://localhost:8088/")
-                .contact(new Contact("lc", "http://localhost:8088/", "liangchao03@ppdai.com"))
-                .version("1.0")
-                .build();
+return new ApiInfoBuilder().title("Swagger Title")
+        .description("This is description.")
+        .termsOfServiceUrl("http://localhost:8088/")
+        .contact(new Contact("lc", "http://localhost:8088/", "liangchao03@ppdai.com"))
+        .version("1.0")
+        .build();
     }
 
 }
