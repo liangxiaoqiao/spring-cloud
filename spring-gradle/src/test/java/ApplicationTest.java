@@ -1,4 +1,4 @@
-import com.lc.gradle.Application;
+import com.lc.gradle.SpringGradleApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = SpringGradleApplication.class)
 @AutoConfigureMockMvc
 public class ApplicationTest {
 

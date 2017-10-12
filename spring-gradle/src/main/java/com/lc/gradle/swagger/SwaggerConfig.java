@@ -1,4 +1,4 @@
-package com.lc.gradle.config;
+package com.lc.gradle.swagger;
 
 import org.apache.commons.math.fraction.BigFraction;
 import org.springframework.context.annotation.Bean;

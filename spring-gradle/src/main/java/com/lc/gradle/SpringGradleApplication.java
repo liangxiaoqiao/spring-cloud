@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Created by liangchao03 on 2017/6/15.
  */
 @SpringBootApplication
-public class Application {  //implements EmbeddedServletContainerCustomizer
+public class SpringGradleApplication {  //implements EmbeddedServletContainerCustomizer
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(SpringGradleApplication.class, args);
     }
 
 //    @Override
