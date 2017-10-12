@@ -1,0 +1,15 @@
+group 'com.lc.spring-service.spring-ribbon-consumer'
+
+jar {
+    baseName = 'spring-ribbon-consumer'
+}
+
+
+dependencies {
+    compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
+    compile('org.springframework.cloud:spring-cloud-starter-ribbon')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.projectlombok:lombok:1.16.6")
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+}

@@ -1,1 +1,39 @@
-*.iml
+
+    ### Custom Settings
+    !gradle/wrapper/gradle-wrapper.jar
+    .gradle
+    *.log
+    log/
+    *.DS_Store
+    *.class
+    .settings/
+    static/
+    classes
+    application-local.properties
+    
+    
+    
+    ### STS ###
+    .apt_generated
+    .classpath
+    .factorypath
+    .project
+    .settings
+    .springBeans
+    
+    ### IntelliJ IDEA ###
+    .idea
+    *.iws
+    *.iml
+    *.ipr
+    
+    ### NetBeans ###
+    nbproject/private/
+    build/
+    nbbuild/
+    dist/
+    nbdist/
+    .nb-gradle/%
+    
+    logs
+    out

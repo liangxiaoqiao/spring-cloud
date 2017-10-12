@@ -1,0 +1,77 @@
+
+buildscript {
+    ext {
+        projectVersion = '0.0.1'
+        jacocoVersion = '0.7.7.201606060606'
+    }
+    repositories {
+        maven { url MAVEN_REPO_ALIYUN }
+        jcenter()
+        mavenLocal()
+    }
+
+}
+
+plugins {
+    /* 插件仓库地址 https://plugins.gradle.org */
+    id "org.springframework.boot" version "1.4.4.RELEASE" apply false
+    id "org.asciidoctor.convert" version "1.5.3" apply false
+    id 'com.gradle.build-scan' version '1.7.4'
+}
+
+buildScan {
+    licenseAgreementUrl = 'https://gradle.com/terms-of-service'
+    licenseAgree = 'yes'
+}
+
+allprojects {
+    group = "com.lc.spring-service"
+    version = projectVersion
+}
+
+subprojects{
+    apply plugin: 'java'
+    apply plugin: "io.spring.dependency-management"
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+        options.compilerArgs << "-parameters"
+    }
+
+    test.enabled = false
+
+    repositories {
+        maven { url MAVEN_REPO_ALIYUN }
+        jcenter()
+        mavenLocal()
+    }
+
+    dependencies {
+        compileOnly('org.projectlombok:lombok:1.16.18')
+        compileOnly('org.springframework.boot:spring-boot-configuration-processor:1.5.7.RELEASE')
+        testCompile("junit:junit:4.12")
+    }
+
+    ext{
+        springCloudVersion = 'Camden.SR7'
+    }
+
+    afterEvaluate {
+        dependencyManagement {
+            imports {
+                mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            }
+        }
+    }
+}
+
+apply plugin: 'idea'
+tasks.idea.dependsOn(tasks.cleanIdea)
+

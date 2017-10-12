@@ -1,40 +1,9 @@
-buildscript {
-    repositories {
-		mavenLocal()
-        mavenCentral()
-        maven {
-            url("https://plugins.gradle.org/m2/")
-        }
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
-    }
-}
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
+group 'com.lc.spring-service.spring-gradle'
 
 jar {
     baseName = 'spring-gradle'
-    version =  '0.1.0'
 }
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-    mavenLocal()
-}
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-dependencyManagement {
-    imports {
-        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Camden.SR5'
-    }
-}
 
 dependencies {
     compile("org.projectlombok:lombok:1.16.6")
@@ -57,35 +26,4 @@ dependencies {
     //compile 'io.swagger:swagger-jersey2-jaxrs:1.5.0'
     compile 'io.springfox:springfox-swagger2:2.6.1'
     compile 'io.springfox:springfox-swagger-ui:2.6.1'
-}
-
-task create {
-    doLast {
-        sourceSets*.java.srcDirs*.each { it.mkdirs() }
-        sourceSets*.resources.srcDirs*.each { it.mkdirs() }
-        def root = getProject().rootProject.name
-        def sb = new StringBuilder();
-        def l = root.split("-")
-        def name = ""
-        def path = "src\\main\\java\\com\\lc"
-        l.each { str ->
-            name = name + str.substring(0, 1).toUpperCase() + str.substring(1)
-            path = path + "\\" + str
-        }
-        name = name + "Application"
-
-        sb.append("package com.lc." + root.replace("-", ".") + ";\r\n")
-        sb.append("\r\npublic class " + name + """{
-            public static void main(String[] args){
-            
-            }
-        }
-        """)
-        file(path).mkdirs()
-        def f = file(path + "\\" + name + ".java")
-        f.createNewFile()
-        f.write(sb.toString())
-        file('src/main/resources/application.properties').createNewFile();
-        println "Create Done"
-    }
 }
