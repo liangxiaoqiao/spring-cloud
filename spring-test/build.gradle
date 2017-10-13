@@ -1,0 +1,10 @@
+group 'com.lc.spring-cloud.spring-test'
+
+jar{
+    baseName = 'spring-test'
+}
+
+dependencies{
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.9.1'
+    // compile 'org.slf4j:slf4j-jdk14:1.7.25'
+}
