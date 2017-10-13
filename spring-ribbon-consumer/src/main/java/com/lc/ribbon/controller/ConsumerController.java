@@ -55,7 +55,7 @@ public class ConsumerController {
     }
 
     /**
-     * This method use user defined hystric command to visit the  /HELLO-SERVICE/user method, to get a @see {@link User} entity.
+     * This method use user defined hystric command to visit the  /HELLO-SERVICE/user method, to get a @see {@link User} module.
      * url /consumer-command
      * @param id The id of the @see {@link User} class, default value is 18
      * @param desc The desc of the @see {@link User} class, default valus is "from hystric:容错保护机制"

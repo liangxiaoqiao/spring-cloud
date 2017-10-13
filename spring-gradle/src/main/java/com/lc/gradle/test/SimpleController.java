@@ -65,7 +65,7 @@ public class SimpleController {
      * @param name the name of user
      * @param age the age of user
      * @param desc the desc of user
-     * @return User entity
+     * @return User module
      */
     @ApiOperation(value="bind user",notes = "根据传入值，生成一个user",response = User.class,tags = {"user tag","json tag"})
     @ApiResponses(value={@ApiResponse(code=406,message="406 Error",response = MyRandom.class),@ApiResponse(code=500,message = "500 Error",response =User.class)})
@@ -89,7 +89,7 @@ public class SimpleController {
     }
 
     /**
-     * @return  a MyRandom entity, all of its params were come from config
+     * @return  a MyRandom module, all of its params were come from config
      */
     @RequestMapping(value="/random",method = {RequestMethod.POST,RequestMethod.GET})
     public MyRandom random(){

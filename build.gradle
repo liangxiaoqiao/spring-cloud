@@ -8,6 +8,7 @@ buildscript {
         maven { url MAVEN_REPO_ALIYUN }
         jcenter()
         mavenLocal()
+        mavenCentral()
     }
 
 }
@@ -25,9 +26,11 @@ buildScan {
 }
 
 allprojects {
-    group = "com.lc.spring-service"
+    group = "com.lc.spring-cloud"
     version = projectVersion
+
 }
+
 
 subprojects{
     apply plugin: 'java'
@@ -51,11 +54,13 @@ subprojects{
         maven { url MAVEN_REPO_ALIYUN }
         jcenter()
         mavenLocal()
+        mavenCentral()
     }
 
     dependencies {
         compileOnly('org.projectlombok:lombok:1.16.18')
         compileOnly('org.springframework.boot:spring-boot-configuration-processor:1.5.7.RELEASE')
+        compile 'org.slf4j:slf4j-api:1.7.25'
         testCompile("junit:junit:4.12")
     }
 

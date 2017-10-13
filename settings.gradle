@@ -5,7 +5,5 @@ include 'spring-feign-consumer'
 include 'spring-gradle'
 include 'spring-ribbon-consumer'
 include 'spring-zuul-api-gateway'
-
-
-
+include 'spring-test'
 
