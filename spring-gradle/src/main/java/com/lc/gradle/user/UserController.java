@@ -1,10 +1,10 @@
 package com.lc.gradle.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,4 +36,24 @@ public class UserController {
         }
         return new ArrayList<>();
     }
+
+    @RequestMapping(value = "/school", method = {RequestMethod.POST,RequestMethod.GET})
+    public List<User> getBySchool(@RequestParam(value = "school")String school){
+        Optional<List<User>> optional = userService.findBySchool(school);
+        if(optional.isPresent()){
+            return optional.get();
+        }
+        return new ArrayList<>();
+    }
+
+    @RequestMapping(value="/birth",method = {RequestMethod.POST,RequestMethod.GET})
+    public List<User> getByBIrth(@RequestParam(value = "start")@DateTimeFormat(pattern="yyyy-MM-dd")LocalDate start,@RequestParam@DateTimeFormat(pattern="yyyy-MM-dd")LocalDate end){
+        Optional<List<User>> optional = userService.findByBirthdayBetween(start,end);
+        if(optional.isPresent()){
+            return optional.get();
+        }
+        return new ArrayList<>();
+    }
+
+
 }
