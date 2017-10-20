@@ -1,5 +1,7 @@
 package com.lc.gradle.user;
 
+import com.lc.gradle.config.UserAsParamTestBean;
+import com.lc.gradle.config.UserProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +56,27 @@ public class UserController {
         }
         return new ArrayList<>();
     }
+
+
+
+    @Autowired
+    private UserProperties userProperties;
+
+    @Autowired
+    private UserAsParamTestBean userAsParamTestBean;
+
+    //测试从配置读取内容绑定到bean属性
+    @RequestMapping(value="/prop")
+    public String propFromConfig(){
+        return userProperties.toString();
+    }
+
+    //测试从配置读取内容绑定到Bean属性，并且从构造参数传入到方法。Configure里边@Bean创建一个Bean
+    @RequestMapping(value="/bindbean")
+    public String bindBean(){
+        return userAsParamTestBean.toString();
+    }
+
 
 
 }
