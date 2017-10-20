@@ -65,7 +65,7 @@ subprojects{
     }
 
     ext{
-        springCloudVersion = 'Camden.SR7'
+        springCloudVersion = 'Dalston.SR4'
     }
 
     afterEvaluate {
