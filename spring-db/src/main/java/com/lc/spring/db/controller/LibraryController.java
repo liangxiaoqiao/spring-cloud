@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  *         2017/10/26
  */
 @RestController
-public class BookController {
+public class LibraryController {
 
     @Autowired
     private BookMapper bookMapper;
