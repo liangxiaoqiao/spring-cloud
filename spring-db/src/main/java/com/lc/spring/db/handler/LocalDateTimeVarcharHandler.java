@@ -23,24 +23,36 @@ public class LocalDateTimeVarcharHandler extends BaseTypeHandler<LocalDateTime> 
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, LocalDateTime parameter, JdbcType jdbcType) throws SQLException {
-
+        if(parameter == null){
+            ps.setString(i,null);
+        }
+        ps.setString(i,String.valueOf(parameter.toEpochSecond(ZoneOffset.UTC)));
     }
 
     @Override
     public LocalDateTime getNullableResult(ResultSet rs, String columnName) throws SQLException {
         String result = rs.getString(columnName);
+        if(result == null || "".equals(result.trim())){
+            return null;
+        }
         return LocalDateTime.ofEpochSecond(Long.parseLong(result),0, ZoneOffset.UTC);
     }
 
     @Override
     public LocalDateTime getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
         String result = rs.getString(columnIndex);
+        if(result == null || "".equals(result.trim())){
+            return null;
+        }
         return LocalDateTime.ofEpochSecond(Long.parseLong(result),0, ZoneOffset.UTC);
     }
 
     @Override
     public LocalDateTime getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
         String result = cs.getString(columnIndex);
+        if(result == null || "".equals(result.trim())){
+            return null;
+        }
         return LocalDateTime.ofEpochSecond(Long.parseLong(result),0, ZoneOffset.UTC);
     }
 }

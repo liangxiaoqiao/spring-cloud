@@ -36,7 +36,7 @@ public interface AuthorMapper {
     Author getById(@Param("id") Integer id);
 
 
-    @Select("select * from author where name like '%#{name}%'")
-    List<Author> getByName(String name);
+    @Select("select * from author where first_name like \"%\"#{name}\"%\" ")
+    List<Author> getByName(@Param("name") String name);
 
 }
