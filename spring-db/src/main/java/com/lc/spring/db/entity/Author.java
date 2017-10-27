@@ -1,7 +1,7 @@
 package com.lc.spring.db.entity;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+import org.apache.ibatis.annotations.Select;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Author {
     private Integer id;
     private String firstName;
@@ -19,4 +21,5 @@ public class Author {
     private LocalDate dateOfBirth;
     private Integer yearOfBirth;
     private LocalDateTime insertTime;
+    private LocalDateTime updateTime;
 }

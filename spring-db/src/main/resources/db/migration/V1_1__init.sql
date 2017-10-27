@@ -4,10 +4,10 @@ CREATE TABLE `author` (
   `last_name` varchar(50) NOT NULL,
   `date_of_birth` date DEFAULT NULL,
   `year_of_birth` int(7) DEFAULT NULL,
-  `inserttime`  timestamp,
-    PRIMARY KEY (`id`)
+  `inserttime` timestamp NULL DEFAULT NULL,
+  `updatetimestr` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `book` (
   `id` int(7) NOT NULL,

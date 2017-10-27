@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author liangchao03
  *         2017/10/26
  */
-@MapperScan(basePackages= "com.lc.spring.db.mapper")
 @SpringBootApplication
 public class SpringDBApplication {
     public static void main(String[] args) {
