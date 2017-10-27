@@ -16,3 +16,7 @@ INSERT INTO `author` VALUES ('8', 'A4', 'B4', null, null, '2017-09-28 20:05:20',
 INSERT INTO `author` VALUES ('9', 'A5', 'B5', null, null, '2017-10-27 14:12:41', '1509084282824');
 INSERT INTO `author` VALUES ('10', 'A6', 'B6', '2017-06-30', null, '2017-10-27 14:12:42', '1509084282824');
 
+INSERT INTO `language` VALUES ('1', 'Chinese');
+INSERT INTO `language` VALUES ('2', 'English');
+INSERT INTO `language` VALUES ('3', 'French');
+INSERT INTO `language` VALUES ('4', 'Japanese');

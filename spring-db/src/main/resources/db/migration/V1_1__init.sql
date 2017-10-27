@@ -10,7 +10,7 @@ CREATE TABLE `author` (
 ) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `book` (
-  `id` int(7) NOT NULL,
+  `id` int(7) NOT NULL AUTO_INCREMENT,
   `author_id` int(7) NOT NULL,
   `title` varchar(400) NOT NULL,
   `published_in` int(7) NOT NULL,
@@ -18,4 +18,10 @@ CREATE TABLE `book` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `language`;
+CREATE TABLE `language` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

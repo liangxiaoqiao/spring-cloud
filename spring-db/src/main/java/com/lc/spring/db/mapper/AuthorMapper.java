@@ -12,15 +12,15 @@ import java.util.List;
  *         2017/10/26
  */
 @Mapper
-public interface AuthorMapper {
+public interface    AuthorMapper {
 
+    @Insert("insert into author(first_name,last_name,date_of_birth,year_of_birth,inserttime,updatetimestr) values (#{firstName},#{lastName},#{dateOfBirth},#{yearOfBirth},#{insertTime},#{updateTime})")
     void insert(Author author);
 
+    @Delete("delete from author where id = #{id}")
     void delete(Author author);
 
-    default void delete(Integer id) {
-    }
-
+    @Update("update author set first_name=#{firstName},last_name=#{lastName},date_of_birth=#{dateOfBirth},year_of_birth=#{yearOfBirth},inserttime=#{insertTime},updatetimestr=#{updateTime} where id=#{id}")
     void update(Author author);
 
     @Select("select * from author where id = #{id}")
