@@ -6,8 +6,11 @@ import com.lc.spring.db.entity.Language;
 import com.lc.spring.db.mapper.AuthorMapper;
 import com.lc.spring.db.mapper.BookMapper;
 import com.lc.spring.db.mapper.LanguageMapper;
-import org.apache.ibatis.annotations.Lang;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.serviceregistry.Registration;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +26,9 @@ import java.util.List;
  */
 @RestController
 public class LibraryController {
+
+    private final Logger logger = Logger.getLogger(getClass());
+
 
     @Autowired
     private BookMapper bookMapper;
@@ -75,6 +81,25 @@ public class LibraryController {
     public Language getLanguageById2(@RequestParam Integer id) {
         Language language = languageMapper.getById2(id);
         return language;
+    }
+
+
+
+    /**
+     *
+     */
+    @Autowired
+    private DiscoveryClient client;
+
+    @Autowired
+    private Registration registration;
+
+    @RequestMapping("/discovery")
+    public String discover(){
+        logger.info(client);
+        List<ServiceInstance > instances = client.getInstances(registration.getServiceId());
+        logger.info(instances);
+        return "disvocer";
     }
 
 }
