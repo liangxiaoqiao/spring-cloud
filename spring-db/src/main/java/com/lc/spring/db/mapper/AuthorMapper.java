@@ -25,13 +25,14 @@ public interface    AuthorMapper {
 
     @Select("select * from author where id = #{id}")
     @Results(id="authorResult",value = {
-            @Result(id=true,column = "id",property = "id",javaType = Integer.class ),
+            @Result(id=true,column = "id",property = "id"),
             @Result(column="first_name",property = "firstName"),
             @Result(column="last_name",property = "lastName"),
             @Result(column="date_of_birth",property = "dateOfBirth",typeHandler = LocalDateHandler.class),
             @Result(column="year_of_birth",property = "yearOfBirth"),
             @Result(column="inserttime",property = "insertTime"),
-            @Result(column="updatetimestr",property = "updateTime",typeHandler = LocalDateTimeVarcharHandler.class)
+            @Result(column="updatetimestr",property = "updateTime",typeHandler = LocalDateTimeVarcharHandler.class),
+            @Result(column="id",property = "book",many = @Many(select = "com.lc.spring.db.mapper.BookMapper.getByAuthorId"))
     })
     Author getById(@Param("id") Integer id);
 

@@ -6,18 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author liangchao03
- *         2017/10/26
+ * Created by liangchao on 17-10-28.
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book {
+public class Language {
     private Integer id;
-    private Integer authorId;
-    private String title;
-    private Integer publishedIn;
-    private Integer languageId;
-    private Language language;
+    private String name;
 }
