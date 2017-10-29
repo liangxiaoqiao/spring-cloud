@@ -18,6 +18,15 @@ function start_eureka() {
     echo 'start eureka finish'
 }
 
+
+function start_eureka_local() {
+    echo 'start eureka local'
+    cd ./spring-eureka-server
+    gradle clean build
+    nohup java -jar build/libs/spring-eureka-server-0.0.1.jar --spring.profiles.active=local > /home/logs/eureka1.log &
+    echo 'start eureka local finish'
+}
+
 function start_discover(){
     echo 'start discover'
     cd ./spring-eureka-server
@@ -62,7 +71,11 @@ function show(){
 if [ $2 = 'start' ]
 then
     if [ $1 = 'eureka' ]
-    then start_eureka
+    then
+        if [ $3 = 'local' ]
+        then start_eureka_local
+        else start_eureka
+        fi
     elif [ $1 = 'gradle' ]
     then start_gradle
     elif [ $1 = 'db' ]
