@@ -1,5 +1,6 @@
 package com.lc.ribbon.controller;
 
+import com.lc.ribbon.service.RibbonService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -20,18 +21,30 @@ import java.util.Map;
 @RestController
 public class RibbonController {
     @Autowired
-    private RestTemplate template;
+    private RibbonService ribbonService;
 
-    @RequestMapping("/ribbon/{path1}/{path2}")
+    @RequestMapping("/ribbonid/{path1}/{path2}")
     public String ribbonId(@PathVariable String path1,@PathVariable String path2,@RequestParam String id){
-        ResponseEntity entity=  template.getForEntity("http://DB-ONE-SERVICE/"+path1+"/"+path2+"?id="+id,Object.class);
-        return entity.getBody().toString();
+       return ribbonService.ribbonId(path1,path2,id);
     }
 
 
     @RequestMapping("/ribbonname/{path1}/{path2}")
     public String ribbonName(@PathVariable String path1,@PathVariable String path2,@RequestParam String name){
-        ResponseEntity entity=  template.getForEntity("http://DB-ONE-SERVICE/"+path1+"/"+path2+"?name="+name,Object.class);
-        return entity.getBody().toString();
+        return ribbonService.ribbonName(path1,path2,name);
+
+    }
+
+
+    @RequestMapping("/ribbon")
+    public String ribbonName(){
+        return ribbonService.ribbon();
+
+    }
+
+    @RequestMapping("/ribbon2")
+    public String ribbon2(){
+        return ribbonService.ribbon2(1L);
+
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author liangchao03
@@ -64,7 +65,14 @@ public class LibraryController {
 
 
     @RequestMapping("/book/id")
-    public Book getBookById(@RequestParam Integer id) {
+    public Book getBookById(@RequestParam Integer id) throws InterruptedException {
+        Random random = new Random();
+        int sleep = random.nextInt(10);
+        if(sleep > 6){
+            System.out.println("\r\nsleep:"+sleep+"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            Thread.sleep(sleep*1000);
+        }
+
         Book book = bookMapper.getById(id);
         return book;
     }
