@@ -44,12 +44,24 @@ public class RibbonService {
         return entity.getBody().toString();
     }
 
+    @HystrixCommand(fallbackMethod = "fallbackAgain2")
     public String myfallback2(Long id){
-        return "my fall back2";
+        throw new RuntimeException("myfallback2自定义抛出异常");
     }
 
+    public String fallbackAgain2(Long id, Throwable e){
+        System.out.println(e.getMessage());
+        return "ribbon2 第二次降级服务";
+    }
+
+    @HystrixCommand(fallbackMethod = "fallbackAgain1")
     public String myfallback(){
-        return "my fall back";
+        throw new RuntimeException("myfallback抛出异常");
+    }
+
+    public String fallbackAgain1(Throwable e){
+        System.out.println(e.getMessage());
+        return "ribbon1 第二次降级服务";
     }
 
 
