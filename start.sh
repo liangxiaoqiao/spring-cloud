@@ -78,7 +78,7 @@ then
         fi
     elif [ $1 = 'gradle' ]
     then start_gradle
-    elif [ $1 = 'db' ]
+    elif [ $1 = 'spring-db' ]
     then start_db
     elif [ $1 = 'discover' ]
     then start_discover
