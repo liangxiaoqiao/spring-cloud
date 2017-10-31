@@ -2,14 +2,17 @@ package com.lc.spring.db;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author liangchao03
  *         2017/10/26
  */
+@Configuration
+@EnableAutoConfiguration
 @EnableDiscoveryClient
 @SpringBootApplication
 public class SpringDBApplication {
