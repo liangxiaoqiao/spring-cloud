@@ -2,10 +2,7 @@ package com.lc.spring.db.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,6 +11,15 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class Advice {
+    @Pointcut("@annotation(MyAnno)")
+    public void myPointCut(){
+
+    }
+
+    @After("myPointCut()")
+    public void after(){
+        System.out.println("After 执行");
+    }
 
     @AfterReturning("@annotation(MyAnno)")
     public void afterReturn(JoinPoint joinPoint) throws Throwable {
