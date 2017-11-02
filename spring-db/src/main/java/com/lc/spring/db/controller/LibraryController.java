@@ -1,5 +1,6 @@
 package com.lc.spring.db.controller;
 
+import com.lc.spring.db.aspect.MyAnno;
 import com.lc.spring.db.entity.Author;
 import com.lc.spring.db.entity.Book;
 import com.lc.spring.db.entity.Language;
@@ -63,7 +64,7 @@ public class LibraryController {
     }
 
 
-
+    @MyAnno
     @RequestMapping("/book/id")
     public Book getBookById(@RequestParam Integer id) throws InterruptedException {
         Random random = new Random();
