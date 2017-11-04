@@ -27,6 +27,13 @@ function start_eureka_local() {
     echo 'start eureka local finish'
 }
 
+function start_config_server(){
+    echo 'start config server'
+    cd ./spring-config-server
+    gradle clean build
+    nohup java -jar build/libs/spring-config-server-0.0.1.jar   > /home/logs/configserver.log &
+    echo 'config server finish'
+}
 function start_discover(){
     echo 'start discover'
     cd ./spring-eureka-server
@@ -82,6 +89,8 @@ then
     then start_db
     elif [ $1 = 'discover' ]
     then start_discover
+    elif [ $1 = 'config-server' ]
+    then start_config_server
     else
     echo 'not matched'
     fi
