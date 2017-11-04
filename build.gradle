@@ -9,13 +9,15 @@ buildscript {
         jcenter()
         mavenLocal()
         mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
     }
 
 }
 
 plugins {
     /* 插件仓库地址 https://plugins.gradle.org */
-    id "org.springframework.boot" version "1.4.4.RELEASE" apply false
+    id "org.springframework.boot" version "1.5.8.RELEASE" apply false
     id "org.asciidoctor.convert" version "1.5.3" apply false
     id 'com.gradle.build-scan' version '1.9.1'
 }
@@ -59,9 +61,9 @@ subprojects{
 
     dependencies {
         compileOnly('org.projectlombok:lombok:1.16.18')
-        compileOnly('org.springframework.boot:spring-boot-configuration-processor:1.5.7.RELEASE')
         compile 'org.slf4j:slf4j-api:1.7.25'
         testCompile("junit:junit:4.12")
+        compileOnly('org.springframework.boot:spring-boot-configuration-processor:1.5.7.RELEASE')
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
 
@@ -76,6 +78,51 @@ subprojects{
             }
         }
     }
+
+
+
+
+    buildscript {
+        ext {
+            springBootVersion = '1.5.8.RELEASE'
+        }
+        repositories {
+            maven { url MAVEN_REPO_ALIYUN }
+            jcenter()
+            mavenLocal()
+            mavenCentral()
+            maven { url "https://repo.spring.io/snapshot" }
+            maven { url "https://repo.spring.io/milestone" }
+        }
+        dependencies {
+            classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 apply plugin: 'idea'

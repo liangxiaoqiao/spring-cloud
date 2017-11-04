@@ -1,0 +1,25 @@
+group 'com.lc.spring-cloud.spring-config-server'
+
+jar{
+    baseName ='spring-config-server'
+}
+
+
+dependencies{
+    compile('org.springframework.cloud:sprieng-cloud-starter-config')
+    compile('org.springframework.cloud:spring-cloud-config-server')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+
+task create{
+    doLast{
+        sourceSets*.java.srcDirs*.each{it.mkdirs()}
+        sourceSets*.resources.srcDirs*.each{it.mkdirs()}
+    }
+}
+
+
+
+
+
