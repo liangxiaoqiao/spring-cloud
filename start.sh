@@ -4,8 +4,8 @@ function start_db() {
     echo 'start db'
     cd ./spring-db
     gradle clean build
-    nohup java -jar build/libs/spring-db-0.0.1.jar  --spring.profiles.active=local > /home/logs/db1.log &
-    nohup java -jar build/libs/spring-db-0.0.1.jar  --spring.profiles.active=test > /home/logs/db2.log &
+    nohup java -jar build/libs/spring-db-0.0.1.jar  --spring.cloud.config.profile==local > /home/logs/db1.log &
+    nohup java -jar build/libs/spring-db-0.0.1.jar  --spring.cloud.config.profile==test > /home/logs/db2.log &
     echo 'start db finish'
 }
 
@@ -40,11 +40,30 @@ function start_discover(){
     gradle clean build
     nohup java -jar build/libs/spring-eureka-server-0.0.1.jar --spring.profiles.active=local > /home/logs/eureka1.log &
     echo '启动eureka注册中心'
+    start_db2
+}
+
+function start_db2(){
     cd ../spring-db
     gradle clean build
-    nohup java -jar build/libs/spring-db-0.0.1.jar  --spring.profiles.active=one --server.port=8090 > /home/logs/db1.log &
-    nohup java -jar build/libs/spring-db-0.0.1.jar  --spring.profiles.active=one --server.port=8091 > /home/logs/db2.log &
-    echo '启动两个服务提供者'
+    nohup java -jar build/libs/spring-db-0.0.1.jar  --spring.cloud.config.profile=test > /home/logs/db1.log &
+    nohup java -jar build/libs/spring-db-0.0.1.jar  --spring.cloud.config.profile=local > /home/logs/db2.log &
+    echo '启动两个spring-db服务提供者'
+}
+
+function start_zuul(){
+    cd ../spring-zuul
+    gradle clean build
+    nohup java -jar build/libs/spring-zuul-0.0.1.jar    > /home/logs/zuul.log &
+    echo '启动zuul gateway'
+}
+
+function start_all(){
+    echo 'start all'
+    start_config_server
+    start_db2
+    start_zuul
+    echo 'all has stated'
 }
 
 function start_gradle() {
@@ -62,6 +81,12 @@ function stop(){
     done
 }
 
+function stop_all(){
+    stop 'spring-zuul'
+    stop 'spring-db'
+    stop 'spring-config-server'
+
+}
 function stop_discover(){
     stop 'eureka'
     stop 'spring-db'
@@ -77,6 +102,7 @@ function show(){
 
 if [ $2 = 'start' ]
 then
+
     if [ $1 = 'eureka' ]
     then
         if [ $3 = 'local' ]
@@ -91,15 +117,22 @@ then
     then start_discover
     elif [ $1 = 'config-server' ]
     then start_config_server
+    elif [ $1 = 'all' ]
+    then start_all
     else
     echo 'not matched'
     fi
+
 elif [[ $2 = 'stop' ]]
 then
+
     if [ $1 = 'discover' ]
     then stop_discover
+    elif [ $1 = 'all' ]
+    then stop_all
     else stop $1
     fi
+
 elif [[ $2 = 'show' ]]
 then show $1
 else
