@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Configuration;
  * @author liangchao03
  *         2017/10/26
  */
-@Configuration
-@EnableAutoConfiguration
 @EnableDiscoveryClient
 @SpringBootApplication
 public class SpringDBApplication {
