@@ -1,3 +1,4 @@
 # PropertySource Loaders
 org.springframework.boot.env.PropertySourceLoader=\
-com.lc.spring.db.loader.CustomPropertySourceLoader
+com.lc.spring.db.loader.CustomPropertySourceLoader\
+  com.lc.spring.db.loader.CustomPropertySourceLoader2
